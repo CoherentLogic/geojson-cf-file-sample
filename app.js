@@ -90,16 +90,16 @@ function pageInit()
 }
 
 //
-// submitJSON() will build up the AJAX request and POST it to write_json.cfm
+// submitJSON() will build up the AJAX request and POST it to the writeJSON() method of Json.cfc
 // and is called when you click "Save JSON to Server" in default.cfm
 //
-// write_json.cfm will write the contents of JS variable geojsonObject to the
+// Json.writeJSON() will write the contents of JS variable geojsonObject to the
 // file "file.json" on the server.
 //
 function submitJSON()
 {
     var postData = new FormData();
-    var postURL = "write_json.cfm";
+    var postURL = "Json.cfc?method=writeJSON";
 
     // adds the GeoJSON object to the body of the POST request.
     postData.append('geojson', JSON.stringify(geojsonObject));
@@ -120,12 +120,12 @@ function submitJSON()
 // load the JSON file into the "File Read from Server" div. You could also
 // call this from a different page, i.e. to load polygons into a GMap.
 //
-// This builds up an AJAX request to GET read_json.cfm, which will bring in
-// the contents of file.json on the server.
+// This builds up an AJAX request to GET the readJSON() method of Json.cfc,
+// which will bring in the contents of file.json on the server.
 //
 function readJSON()
 {
-    var getURL = "read_json.cfm";
+    var getURL = "Json.cfc?method=readJSON";
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', getURL, true);
